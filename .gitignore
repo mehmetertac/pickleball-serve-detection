@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+dist/
+*.egg-info/
+.venv/
+downloaded_videos/
+
+# YOLO/VLM weights exceed GitHub's 100MB/file limit — use releases, HF, or env PICKLEBALL_SERVE_ADAPTER
+models/

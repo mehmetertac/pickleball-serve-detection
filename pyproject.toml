@@ -1,0 +1,61 @@
+[project]
+name = "pickleball-serve-detection"
+version = "0.1.0"
+description = "Pickleball serve detection with VLM (Qwen2.5-VL), cascade, and audio proposer"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "opencv-python>=4.12.0.88",
+]
+
+[project.optional-dependencies]
+detection = [
+    "transformers>=4.40.0",
+    "torch>=2.0.0",
+    "accelerate>=0.30.0",
+    "bitsandbytes>=0.43.0",
+    "qwen-vl-utils>=0.0.2",
+    "pillow>=10.0.0",
+    "librosa>=0.10.0",
+    "scipy>=1.10.0",
+    "soundfile>=0.12.0",
+]
+training = [
+    "pickleball-serve-detection[detection]",
+    "peft>=0.10.0",
+    "trl>=0.8.0",
+    "datasets>=2.19.0",
+    "wandb>=0.16.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pickleball_serve_detection"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-mock>=3.15.1",
+    "ruff>=0.14.10",
+    "librosa>=0.10.0",
+    "scipy>=1.10.0",
+    "soundfile>=0.12.0",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pickleball_serve_detection"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
